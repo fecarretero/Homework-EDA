@@ -24,7 +24,7 @@ public class Homework {
         int regular = 0;
         int[] arr1 = new int[10];
         int[] arr2 = new int[10];
-
+        
         for (int i = 0; i < resp.length(); i++) {
             char c1 = resp.charAt(i);
             char c2 = resp.charAt(i);
