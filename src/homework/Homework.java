@@ -21,15 +21,16 @@ public class Homework {
             Num_Respuesta = Numero.GeneraNumero(); // Metodo que genera numero en string y imprime en consola por prueba
             do {
                 Num_Referencia = EscribirNumero(); //Metodo que pregunta el numero a adivinar
-                controlador = Numero.Comparar(Num_Referencia, Num_Respuesta, seleccion);
+                controlador = Numero.Comparar(Num_Referencia, Num_Respuesta, seleccion); //metodo que compara las entradas de numeros y devuelve los que estan bien
             } while (4 != (controlador));
             JOptionPane.showMessageDialog(null, "Felicidades! Adivinaste el numero");
 
         } else {
 
             Num_Respuesta = EscribirNumero();
+            Num_Referencia = Numero.GeneraNumero(); 
             do {
-                Num_Referencia = Numero.GeneraNumero();
+
                 controlador = Numero.Comparar(Num_Referencia, Num_Respuesta, seleccion);
             } while (4 != (controlador));
             JOptionPane.showMessageDialog(null, "La computadora adivino tu numero");
@@ -50,7 +51,7 @@ public class Homework {
     }
 
     public static class Numero {
-
+                
         public static int Comparar(String resp, String adiv, int juga) {
             int bien = 0;
             int regular = 0;
@@ -76,34 +77,39 @@ public class Homework {
 
         public static String GeneraNumero() {
             int respuesta;
-boolean controlador;
+            boolean controlador;
             String respuesta_String;
             Random num = new Random();
 
             do {
-                do{
-                respuesta = (num.nextInt(9999) + 999);
-                respuesta_String = Integer.toString(respuesta);
-                   controlador= Duplicados(respuesta);
-                }while(controlador);
+                do {
+                    respuesta = (num.nextInt(9999) + 999);
+                    respuesta_String = Integer.toString(respuesta); 
+                    controlador = Duplicados(respuesta); //Se verifica que no se repitan numeros
+                } while (controlador);
             } while (respuesta_String.length() != 4);
 
             System.out.println(respuesta_String);
             return respuesta_String;
         }
 
-        public static boolean Duplicados(int num){
-		boolean[] dup = new boolean[10];
-		while(num > 0){
-			if(dup[num%10]) return true;
-			dup[num%10] = true;
-			num/= 10;
-		}
-		return false;
+        public static boolean Duplicados(int num) { //Algoritmo de luhn para verificar repeticiones de chars
+            boolean[] dup = new boolean[10];
+            while (num > 0) {
+                if (dup[num % 10]) {
+                    return true;
+                }
+                dup[num % 10] = true;
+                num /= 10;
+            }
+            return false;
 
-            
         }
 
+ 
+    
+    
+    
     }
 
 }
